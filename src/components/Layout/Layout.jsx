@@ -1,8 +1,12 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import Feed from '../Feed/Feed';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import Profile from './Profile';
+import Team from './Team';
+import DateSelector from './DateSelector';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -11,23 +15,25 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+const lightTheme = createTheme({ palette: { mode: 'light' } });
 export default function Layout() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+  <ThemeProvider theme={lightTheme}>
+    <Box sx={{ flexGrow: 1 }} style={{marginTop: '2%'}}>
       <Grid container spacing={3}>
         <Grid item xs>
           <Item>
-              Profile
+              <Profile/>
           </Item>
           <Item>
-            team List
+            <Team />
           </Item>
           <Item>
-              Item3
+              <DateSelector />
           </Item>
         </Grid>
         <Grid item xs={6}>
-            News Feed
+            <Feed />
         </Grid>
         <Grid item xs>
           <Item>Game List</Item>
@@ -35,5 +41,6 @@ export default function Layout() {
         </Grid>
       </Grid>
     </Box>
+    </ThemeProvider>
   );
 }
