@@ -7,6 +7,9 @@ import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import Profile from './Profile';
 import Team from './Team';
 import DateSelector from './DateSelector';
+import Chat from "../Chat";
+import Wheel from '../wheel';
+import Games from "../Games";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -17,11 +20,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const lightTheme = createTheme({ palette: { mode: 'light' } });
 export default function Layout() {
+  const places = ['Pizzas', 'Sandwiches', 'Salads', 'Soup', 'Japanese food', 'Pastas'];
   return (
   <ThemeProvider theme={lightTheme}>
     <Box sx={{ flexGrow: 1 }} style={{marginTop: '2%'}}>
-      <Grid container spacing={3}>
-        <Grid item xs>
+      <Grid container spacing={3} style={{marginLeft: '2%'}}>
+        <Grid item >
           <Item>
               <Profile/>
           </Item>
@@ -35,9 +39,16 @@ export default function Layout() {
         <Grid item xs={6}>
             <Feed />
         </Grid>
-        <Grid item xs>
-          <Item>Game List</Item>
-          <Item>Spinning Wheel</Item>
+        <Grid item xs={3}>
+          <Item style={{height: "20%", overflowY: 'auto'}}>
+            <Games />
+          </Item>
+          <Item>
+            <Wheel items={places}/>
+          </Item>
+          <Item style={{height: "35%" }}>
+            <Chat/>
+          </Item>
         </Grid>
       </Grid>
     </Box>

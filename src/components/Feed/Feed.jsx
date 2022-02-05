@@ -4,8 +4,9 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
-
-
+import TimeLineCard from "./TimelineCard";
+import Card from '@mui/material/Card';
+import PublishArea from './PublishArea';
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   textAlign: 'center',
@@ -18,33 +19,24 @@ const Item = styled(Paper)(({ theme }) => ({
 const lightTheme = createTheme({ palette: { mode: 'light' } });
 
 export default function Feed() {
+  const numberOfcards = 10;
   return (
-    <Grid container spacing={2}>
-        <Grid item xs={12} >
-            <Box
-              sx={{
-                p: 2,
-                bgcolor: 'background.default',
-                display: 'grid',
-                gridTemplateColumns: { md: '1fr 1fr' },
-                gap: 2,
-              }}
-            >
-              <Item>
-              <TextField
-                hiddenLabel
-                id="filled-hidden-label-normal"
-                defaultValue="Normal"
-                variant="filled"
-              />
-              </Item>
-              {[0, 1, 2, 3, 4, 6, 8, 12, 16, 24].map((Feed) => (
-                <Item key={Feed}>
-                  {`Feed=${Feed}`}
-                </Item>
-              ))}
-            </Box>
-        </Grid>
+    <Paper>
+    <PublishArea />
+    <Grid container spacing={2} style={{height: '90vh', marginTop: "1%", overflowY: 'auto'}}>
+          { 
+            [1,2,3,4,5,6,7,8,9,10].map((item)=>{
+              return(
+                <Grid item xs={6} key={item} >
+                  <Paper elevation={24}>
+                   <TimeLineCard/>
+                </Paper>
+                </Grid>
+                
+              )
+            })
+          }
     </Grid>
+    </Paper>
   );
 }
